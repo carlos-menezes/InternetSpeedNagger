@@ -25,7 +25,7 @@
   uSpeed = uSpeed[0][0:2] + '.' + uSpeed[1][0:2]
   ```
 
-  **to**
+**to**
 
   ```python
   dSpeed = dSpeed[0][0:3] + '.' + dSpeed[1][0:2]
