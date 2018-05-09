@@ -31,6 +31,7 @@
   dSpeed = dSpeed[0][0:3] + '.' + dSpeed[1][0:2]
   uSpeed = uSpeed[0][0:3] + '.' + uSpeed[1][0:2]
   ```
+**in order to encapsulate the first 3 digits.**
 
 *** 
 
