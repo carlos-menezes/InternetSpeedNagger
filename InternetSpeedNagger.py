@@ -22,8 +22,9 @@ api = tweepy.API(auth)
 speedtester = speedtest.Speedtest()
 speedtester.get_best_server()
 
-def getSpeed(down=100, up=100, time=1800):
-    #down and up are the expected values for download and upload speed, respectively, in Megabytes.
+def getSpeed(down=100, up=100, time=1800, threshold=15):
+    # down and up are the expected values for download and upload speed, respectively, in Megabytes.
+    # threshold is the "cutoff" point. If obtained download speed < down-threshold or obtained upload speed < up-threshold, then we'll nag your ISP!
     threading.Timer(time, getSpeed).start() # Runs the function every 30 minutes (unless you specify another one).
 
     speedtester = speedtest.Speedtest()
@@ -56,18 +57,18 @@ def getSpeed(down=100, up=100, time=1800):
     uSpeed = uSpeed[0][0:2] + '.' + uSpeed[1][0:2]
     uSpeed = float(uSpeed)
 
-    if dSpeed < down-10 and uSpeed < down-10:
+    if dSpeed < down-threshold and uSpeed < down-threshold:
         api.update_status(f'@MEOpt porque é que as minhas velocidades de download e upload estão a {dSpeed}MB/s e {uSpeed}MB/s, respetivamente, quando tenho um contrato para {down}/{up} MB/s? #meo #meofibra')
         print(f"Mensagem enviada: @MEOpt porque é que as minhas velocidades de download e upload estão a {dSpeed}MB/s e {uSpeed}MB/s, respetivamente, quando tenho um contrato para {down}/{up} MB/s? #meo #meofibra")
 
-    elif dSpeed < down-10: # Compares the download speed from the speedtest with the expected download speed passed as a function argument minus 10. If we have a contract for 100MB/s download, the tweet will be sent if the download speed is below 90MB/s.
+    elif dSpeed < down-threshold: # Compares the download speed from the speedtest with the expected download speed passed as a function argument minus the threshold value. 
 
-        #api.update_status sends a status update.
+        # api.update_status sends a status update.
         api.update_status(f'@MEOpt porque é que a minha velocidade de download está a {dSpeed}MB/s quando tenho um contrato para {down}MB/s? #meo #meofibra') 
 
         print(f"Mensagem enviada: @MEOpt porque é que a minha velocidade de download está a {dSpeed}MB/s quando tenho um contrato para {down}MB/s? #meo #meofibra")
 
-    elif uSpeed < up-10: # Compares the upload speed from the speedtest with the expected download speed passed as a function argument minus 10. If we have a contract for 100MB/s upload, the tweet will be sent if the upload speed is below 90MB/s.
+    elif uSpeed < up-threshold: # Compares the upload speed from the speedtest with the expected download speed passed as a function argument minus the threshold value.
         api.update_status(f'@MEOpt porque é que a minha velocidade de upload está a {uSpeed}MB/s quando tenho um contrato para {up}MB/s? #meo #meofibra')
         print(f"Mensagem enviada: @MEOpt porque é que a minha velocidade de upload está a {uSpeed}MB/s quando tenho um contrato para {up}MB/s? #meo #meofibra")
 
