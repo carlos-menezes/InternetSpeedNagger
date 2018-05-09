@@ -14,21 +14,23 @@
 
   `pip install -U -r requirements.txt`
 
-4. Open `InternetSpeedNagger` and edit the first four variable values with information from the application you registered in step 1.
+4. Open `InternetSpeedNagger.py` and edit the first four variable values with information from the application you registered in step 1.
 5. Change other information you deem necessary.
 
 
-If your internet speed is higher than 100MB/s, you might want to change these lines:
+**If your internet speed is higher than 100MB/s, you might want to change these lines:**
 
-  `dSpeed = dSpeed[0][0:2] + '.' + dSpeed[1][0:2]`
+  ```python
+  dSpeed = dSpeed[0][0:2] + '.' + dSpeed[1][0:2]
+  uSpeed = uSpeed[0][0:2] + '.' + uSpeed[1][0:2]
+  ```
 
-  `uSpeed = uSpeed[0][0:2] + '.' + uSpeed[1][0:2]`
+  **to**
 
-  to
-
-  `dSpeed = dSpeed[0][0:3] + '.' + dSpeed[1][0:2]`
-
-  `uSpeed = uSpeed[0][0:3] + '.' + uSpeed[1][0:2]`
+  ```python
+  dSpeed = dSpeed[0][0:3] + '.' + dSpeed[1][0:2]
+  uSpeed = uSpeed[0][0:3] + '.' + uSpeed[1][0:2]
+  ```
 
 *** 
 
