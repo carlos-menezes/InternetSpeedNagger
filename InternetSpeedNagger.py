@@ -57,7 +57,7 @@ def getSpeed(down=100, up=100, time=1800, threshold=15):
     uSpeed = uSpeed[0][0:2] + '.' + uSpeed[1][0:2]
     uSpeed = float(uSpeed)
 
-    if dSpeed < down-threshold and uSpeed < down-threshold:
+    if dSpeed < down-threshold and uSpeed < up-threshold:
         api.update_status(f'@MEOpt porque é que as minhas velocidades de download e upload estão a {dSpeed}MB/s e {uSpeed}MB/s, respetivamente, quando tenho um contrato para {down}/{up} MB/s? #meo #meofibra')
         print(f"Mensagem enviada: @MEOpt porque é que as minhas velocidades de download e upload estão a {dSpeed}MB/s e {uSpeed}MB/s, respetivamente, quando tenho um contrato para {down}/{up} MB/s? #meo #meofibra")
 
