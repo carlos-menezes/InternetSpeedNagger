@@ -17,10 +17,6 @@ auth.set_access_token(access_token, access_token_secret)
 
 api = tweepy.API(auth)
 
-# SPEEDTEST SETUP #
-
-speedtester = speedtest.Speedtest()
-speedtester.get_best_server()
 
 def getSpeed(down=100, up=100, time=1800, threshold=15):
     # down and up are the expected values for download and upload speed, respectively, in Megabytes.
@@ -30,32 +26,18 @@ def getSpeed(down=100, up=100, time=1800, threshold=15):
     speedtester = speedtest.Speedtest()
     speedtester.get_best_server()
 
-    # speedtester.download() and speedtester.upload() return a float which represents the internet speed in B/s.
+    #speedtester.download() and speedtester.upload() return a float which represents the internet speed in B/s.
     # I use this to create a very rough approximation to MB/s.
 
-    # Say the download speed is 96540000.423932.
-    # First, I make dSpeed a string so that I can split the value.
-    # I split the float by the dot, which turns dSpeed into a list.
+    #Say the download speed is 96540000.423932.
+    #Since there are 1024 Bytes per KB and 1024 KB per MB dividing by 1024**2 will report a MB/S
+    #In this case: 92.07
 
-    #  dSpeed = ['96540000', '423932']
-
-    # To finalize, I concatenate the first two digits of the first index with the first two digits of the second index.
-
-    # dSpeed = dSpeed[0][0:2] + '.' + dSpeed[1][0:2]
-    # print(dSpeed)
-    # 93.79
-
-    dSpeed = str(speedtester.download())
-    dSpeed = dSpeed.split('.')
-    dSpeed = dSpeed[0][0:2] + '.' + dSpeed[1][0:2]
-    dSpeed = float(dSpeed) # Converting dSpeed from string to float so that I can compare the value later on.
-
+    dSpeed = "%.2f" % (speedtester.download() / (1024**2))
     # Same process for the upload speed.
+    uSpeed = "%.2f" % (speedtester.upload() / (1024**2))
 
-    uSpeed = str(speedtester.upload())
-    uSpeed = uSpeed.split('.')
-    uSpeed = uSpeed[0][0:2] + '.' + uSpeed[1][0:2]
-    uSpeed = float(uSpeed)
+    # Thanks @drunicornthe1
 
     if dSpeed < down-threshold and uSpeed < up-threshold:
         api.update_status(f'@MEOpt porque é que as minhas velocidades de download e upload estão a {dSpeed}MB/s e {uSpeed}MB/s, respetivamente, quando tenho um contrato para {down}/{up} MB/s? #meo #meofibra')
