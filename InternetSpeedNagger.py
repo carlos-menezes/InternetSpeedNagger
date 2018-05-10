@@ -71,8 +71,5 @@ def getSpeed(down=100, up=100, time=1800, threshold=15):
     elif uSpeed < up-threshold: # Compares the upload speed from the speedtest with the expected download speed passed as a function argument minus the threshold value.
         api.update_status(f'@MEOpt porque é que a minha velocidade de upload está a {uSpeed}MB/s quando tenho um contrato para {up}MB/s? #meo #meofibra')
         print(f"Mensagem enviada: @MEOpt porque é que a minha velocidade de upload está a {uSpeed}MB/s quando tenho um contrato para {up}MB/s? #meo #meofibra")
-
-    else:
-        pass
                 
 getSpeed()
