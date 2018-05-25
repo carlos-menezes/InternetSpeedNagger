@@ -1,7 +1,7 @@
 # InternetSpeedNagger
 #### Nagging at internet service providers since 2018.
 
-25/05/2018: This project got featured in [Import Python](https://importpython.com)!
+25/05/2018: This project got featured in [Import Python](http://importpython.com)!
 
 ***
 
