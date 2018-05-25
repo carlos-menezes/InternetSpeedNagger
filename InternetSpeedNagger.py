@@ -11,6 +11,7 @@ consumer_secret = ""
 access_token = ""
 access_token_secret = ""
 
+PROVIDER_TWITTER_HANDLE = "@MEOpt" # Change this
 
 auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_token_secret)
@@ -40,18 +41,14 @@ def getSpeed(down=100, up=100, time=1800, threshold=15):
     # Thanks @drunicornthe1
 
     if dSpeed < down-threshold and uSpeed < up-threshold:
-        api.update_status(f'@MEOpt porque é que as minhas velocidades de download e upload estão a {dSpeed}MB/s e {uSpeed}MB/s, respetivamente, quando tenho um contrato para {down}/{up} MB/s? #meo #meofibra')
-        print(f"Mensagem enviada: @MEOpt porque é que as minhas velocidades de download e upload estão a {dSpeed}MB/s e {uSpeed}MB/s, respetivamente, quando tenho um contrato para {down}/{up} MB/s? #meo #meofibra")
+        api.update_status(f'{PROVIDER_TWITTER_HANDLE} why is my download and upload speed at {dSpeed}MB/s — {uSpeed}MB/s, respectively, when I signed a contract for {down}/{up} MB/s?')
 
     elif dSpeed < down-threshold: # Compares the download speed from the speedtest with the expected download speed passed as a function argument minus the threshold value. 
 
         # api.update_status sends a status update.
-        api.update_status(f'@MEOpt porque é que a minha velocidade de download está a {dSpeed}MB/s quando tenho um contrato para {down}MB/s? #meo #meofibra') 
-
-        print(f"Mensagem enviada: @MEOpt porque é que a minha velocidade de download está a {dSpeed}MB/s quando tenho um contrato para {down}MB/s? #meo #meofibra")
+        api.update_status(f'{PROVIDER_TWITTER_HANDLE} why is my download speed at {dSpeed}MB/s when I signed a contract for {down}MB/s?') 
 
     elif uSpeed < up-threshold: # Compares the upload speed from the speedtest with the expected download speed passed as a function argument minus the threshold value.
-        api.update_status(f'@MEOpt porque é que a minha velocidade de upload está a {uSpeed}MB/s quando tenho um contrato para {up}MB/s? #meo #meofibra')
-        print(f"Mensagem enviada: @MEOpt porque é que a minha velocidade de upload está a {uSpeed}MB/s quando tenho um contrato para {up}MB/s? #meo #meofibra")
+        api.update_status(f'{PROVIDER_TWITTER_HANDLE} why is my upload speed at {uSpeed}MB/s when I signed a contract for {up}MB/s?')
                 
 getSpeed()
